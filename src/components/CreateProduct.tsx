@@ -7,7 +7,7 @@ const productData: IProduct = {
   title: "",
   price: 13.5,
   description: "lorem ipsum set",
-  image: "https://i.privatar.cc",
+  image: "https://moya-planeta.ru/upload/images/xl/26/9c/269c493d6fa180bc490e17f19c74f7a13a56633d.jpg",
   category: "electronic",
   rating: {
     rate: 42,
@@ -55,7 +55,9 @@ export function CreateProduct({ onCreate }: CreateProductProps) {
         value={value}
         onChange={changeHandler}
       />
+
       {error && <ErrorMessage error={error} />}
+
       <button
         className="py-2 px-4 border bg-yellow-400 hover:text-white"
         type="submit"
