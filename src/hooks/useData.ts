@@ -1,33 +1,38 @@
 import { useState, useEffect } from "react";
+import CustomError from "../utils/CustomError";
 
-export function useData(url: string) {
-  const [data, setData] = useState(null);
+export function useData<TData>(url: string): { data: TData | null, error: CustomError | Error | null } {
+  const [data, setData] = useState<TData | null>(null);
+  const [error, setError] = useState<CustomError | Error | null>(null);
 
   useEffect(() => {
     async function fetchData() {
+      let ignore = false;
+
       try {
-        let ignore = false;
         const response = await fetch(url);
         const json = await response.json();
 
         if (response.status !== 200) {
-          throw new Error("Что-то пошло не так");
+          console.log("json", json);
+
+          throw new CustomError(response.status, json);
         }
-  
+
         if (!ignore) {
-          setData(json);
+          setData(json as TData);
         }
-  
-        return () => {
-          ignore = true;
-        };
       } catch (error: unknown) {
-        console.error("error", error);
+        setError(error as (CustomError | Error));
       }
+
+      return () => {
+        ignore = true;
+      };
     }
 
     fetchData();
   }, [url]);
 
-  return data;
+  return { data, error };
 }
