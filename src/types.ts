@@ -25,7 +25,7 @@ interface Alert {
   urgency: string; // Срочность
 }
 
-interface Current {
+export interface Current {
   cloud: number; // Облачность в процентах
   condition: Condition;
   feelslike_c: number; // Ощущается как..., в градусах Цельсия
@@ -61,23 +61,25 @@ interface ForecastDay {
     sunset: string;
   };
   date: string;
-  day: {
-    avghumidity: number; // Средняя влажность в процентах
-    avgtemp_c: number; // Средняя температура в градусах Цельсия за день
-    avgvis_km: number; // Средняя видимость в километрах
-    condition: Condition;
-    daily_chance_of_rain: number; // Вероятность дождя в процентах
-    daily_chance_of_snow: number; // Вероятность снега в процентах
-    daily_will_it_rain: number; // Будет ли дождь или нет? 1 = Yes 0 = No
-    daily_will_it_snow: number; // Будет ли снег или нет? 1 = Yes 0 = No
-    maxtemp_c: number;
-    maxwind_kph: number; // Максимальная скорость ветра в километрах в час
-    mintemp_c: number;
-    totalprecip_mm: number; // Общее количество осадков в миллиметрах
-    totalsnow_cm: number; // Общее количество выпавшего снега в сантиметрах
-    uv: number; // УФ-индекс
-  };
+  day: Day;
   hour: Hour[];
+}
+
+export interface Day {
+  avghumidity: number; // Средняя влажность в процентах
+  avgtemp_c: number; // Средняя температура в градусах Цельсия за день
+  avgvis_km: number; // Средняя видимость в километрах
+  condition: Condition;
+  daily_chance_of_rain: number; // Вероятность дождя в процентах
+  daily_chance_of_snow: number; // Вероятность снега в процентах
+  daily_will_it_rain: number; // Будет ли дождь или нет? 1 = Yes 0 = No
+  daily_will_it_snow: number; // Будет ли снег или нет? 1 = Yes 0 = No
+  maxtemp_c: number;
+  maxwind_kph: number; // Максимальная скорость ветра в километрах в час
+  mintemp_c: number;
+  totalprecip_mm: number; // Общее количество осадков в миллиметрах
+  totalsnow_cm: number; // Общее количество выпавшего снега в сантиметрах
+  uv: number; // УФ-индекс
 }
 
 interface Hour {
@@ -103,7 +105,7 @@ interface Hour {
   wind_kph: number; // Максимальная скорость ветра в километрах в час
 }
 
-interface Location {
+export interface Location {
   country: string;
   lat: number; // Широта в десятичных градусах
   localtime: string;
